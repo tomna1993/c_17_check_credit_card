@@ -22,7 +22,6 @@ long long get_cardNumber(void)
 	do
 	{
 		getCardNum = get_long_long("Insert your card number: ");
-		printf("%lld\n", getCardNum);
 	} while (getCardNum < 4000000000000);
 
 	return getCardNum;
