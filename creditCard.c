@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <cs50.c>
 
-long get_cardNumber(void);
+long long get_cardNumber(void);
 
 int main(void)
 {
 	// Get card number from the user
-	long cardNum = get_cardNumber();
+	long long cardNum = get_cardNumber();
 }
 
 // Get a card number from user
-long get_cardNumber(void)
+long long get_cardNumber(void)
 {
-	long getCardNum;
+	long long getCardNum;
 
 	// VISA = 13 or 16 digits; start with 4
 	// AMEX = 15 digits; start with 34 or 37
@@ -21,7 +21,8 @@ long get_cardNumber(void)
 	// Every card number below that number is invalid input
 	do
 	{
-		getCardNum = get_long("Insert your card number: ");
+		getCardNum = get_long_long("Insert your card number: ");
+		printf("%lld\n", getCardNum);
 	} while (getCardNum < 4000000000000);
 
 	return getCardNum;
