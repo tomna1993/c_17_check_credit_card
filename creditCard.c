@@ -11,6 +11,15 @@ int main(void)
 {
 	// Get card number from the user
 	long long cardNum = get_cardNumber();
+
+	// 1 => MASTERCARD = 16 digits; start with 51,52,53,54 or 55
+	// 2 => VISA = 16 digits; start with 4
+	// 3 => AMEX = 15 digits; start with 34 or 37
+	// 4 => VISA = 13 digits; start with 4
+	// 0 => INVALID CARD NUMBER
+	int cardType = get_cardType(cardNum);
+
+	
 }
 
 
