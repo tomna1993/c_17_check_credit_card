@@ -2,12 +2,16 @@
 #include <cs50.c>
 
 long long get_cardNumber(void);
+int getDigit(long long cardNumber, int digit);
+long long powerOf(int num, int power);
+
 
 int main(void)
 {
 	// Get card number from the user
 	long long cardNum = get_cardNumber();
 }
+
 
 // Get a card number from user
 long long get_cardNumber(void)
@@ -25,4 +29,23 @@ long long get_cardNumber(void)
 	} while (getCardNum < 4000000000000);
 
 	return getCardNum;
+}
+
+// Get the choosen digit from the card number
+int getDigit(long long cardNumber, int digit)
+{
+	return (cardNumber % powerOf(10, digit)) / powerOf(10, digit-1);
+}
+
+// Get the power of the given number; num^power
+long long powerOf(int num, int power)
+{
+	long long powerOfNum = num;
+
+	for(int i = 1; i < power; i++)
+	{
+		powerOfNum *= num;
+	}
+
+	return powerOfNum;
 }
