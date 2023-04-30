@@ -5,6 +5,7 @@ long long get_cardNumber(void);
 int getDigit(long long cardNumber, int digit);
 long long powerOf(int num, int power);
 int get_cardType(long long cardNumber);
+bool checkCardNumValidity(long long cardNumber, int cardType);
 
 
 int main(void)
@@ -19,7 +20,35 @@ int main(void)
 	// 0 => INVALID CARD NUMBER
 	int cardType = get_cardType(cardNum);
 
-	
+	bool isCardValid = checkCardNumValidity(cardNum, cardType);
+
+	if(isCardValid)
+	{
+		switch (cardType)
+		{
+			case 0:
+				printf("INVALID\n");
+				break;
+
+			case 1:
+				printf("MASTERCARD\n");
+				break;
+
+			case 2:
+			case 4:
+				printf("VISA\n");
+				break;
+
+			case 3:
+				printf("AMEX\n");
+				break;
+			
+			default:
+				printf("INVALID\n");
+				break;
+		}
+	}
+	else printf("INVALID\n");
 }
 
 
@@ -36,7 +65,7 @@ long long get_cardNumber(void)
 	do
 	{
 		getCardNum = get_long_long("Insert your card number: ");
-	} while (getCardNum < 4000000000000);
+	} while (getCardNum < 1);
 
 	return getCardNum;
 }
@@ -50,6 +79,9 @@ int getDigit(long long cardNumber, int digit)
 // Get the power of the given number; num^power
 long long powerOf(int num, int power)
 {
+	// Every number on power of 0 equals to 1
+	if(power == 0) return 1;
+
 	long long powerOfNum = num;
 
 	for(int i = 1; i < power; i++)
@@ -93,4 +125,50 @@ int get_cardType(long long cardNumber)
 	}
 
 	return 0;
+}
+
+bool checkCardNumValidity(long long cardNumber, int cardType)
+{
+	int digits;
+
+	switch (cardType)
+	{
+	case 0:
+		return false;
+		break;
+
+	case 1:
+	case 2:
+		digits = 16;
+		break;
+
+	case 3:
+		digits = 15;
+		break;
+
+	case 4:
+		digits = 13;
+		break;
+	
+	default:
+		return false;
+		break;
+	}
+
+	int sumOfSecondToLast;
+
+	for(int i = 2; i <= digits; i+=2)
+	{
+		int j = getDigit(cardNumber, i) * 2;
+
+		sumOfSecondToLast = sumOfSecondToLast + getDigit(j , 1) + getDigit(j , 2);
+	}
+
+	for(int i = 1; i <= digits; i+=2)
+	{
+		sumOfSecondToLast = sumOfSecondToLast + getDigit(cardNumber, i);
+	}
+
+	if(getDigit(sumOfSecondToLast, 1) == 0) return true;
+	else return false;
 }
