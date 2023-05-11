@@ -61,7 +61,7 @@ VISA
 But it’s up to you to catch inputs that are not credit card numbers (e.g., a phone number), even if numeric:
 
 ```bash
-$ ./credit
+$ ./creditCard
 Number: 6176292929
 INVALID
 ```
